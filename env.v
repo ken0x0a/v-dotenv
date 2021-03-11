@@ -1,5 +1,7 @@
 module env
 
+import os
+
 // load `.env` => map[string]string
 //
 // ```v
@@ -8,13 +10,21 @@ module env
 // ```
 //
 // Example: load()
-pub fn load() map[string]string {
-	mut file := $embed_file('.env')
+pub fn load(path... string) map[string]string {
+	// # this works only on $debug build
+	// mut file := $embed_file('.env')
+	// 
+	// str := unsafe {
+	// 	cstring_to_vstring(file.data())
+	// }
 
-	str := unsafe {
-		cstring_to_vstring(file.data())
+	mut pa := ".env" // default value
+	for p in path {
+		pa = p
 	}
-
+	str := os.read_file(pa) or {
+		panic("failed to read file $pa")
+	}
 	mut conf := map[string]string{}
 	for line in str.split('\n') {
 		if line.len < 3 {
