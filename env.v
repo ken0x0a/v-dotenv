@@ -6,6 +6,7 @@ import os
 //
 // ```v
 // import env  
+// import os  
 //
 // env.load()  
 // os.getenv("YOUR_ENV_VAR")
@@ -41,6 +42,8 @@ pub fn load(path ...string) {
 // parse `.env` => map[string]string
 //
 // ```v
+// import env  
+//
 // conf := env.parse()  
 // conf["YOUR_ENV_VAR"]
 // ```
@@ -63,7 +66,6 @@ pub fn parse(path ...string) map[string]string {
 		}
 		key_val := line.split_nth('=', 2)
 		conf[key_val[0]] = key_val[1]
-		// os.setenv(key_val[0], key_val[1], true)
 	}
 	return conf
 }
