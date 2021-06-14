@@ -1,14 +1,14 @@
-module env
+module dotenv
 
 import os
 
 // load `.env`
 //
 // ```v
-// import env  
+// import dotenv  
 // import os  
 //
-// env.load()  
+// dotenv.load()  
 // os.getenv("YOUR_ENV_VAR")
 // ```
 //
@@ -42,9 +42,9 @@ pub fn load(path ...string) {
 // parse `.env` => map[string]string
 //
 // ```v
-// import env  
+// import dotenv  
 //
-// conf := env.parse()  
+// conf := dotenv.parse()  
 // conf["YOUR_ENV_VAR"]
 // ```
 //
